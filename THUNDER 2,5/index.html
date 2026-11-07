@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071322" />
+    <meta name="description" content="THUNDERDEAL 2.5 — curated PlayStation and Steam game offers." />
+    <title>THUNDERDEAL 2.5 — Games and offers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <canvas id="bubble-field" aria-hidden="true"></canvas>
+    <div class="pointer-glow" aria-hidden="true"></div>
+
+    <main id="auth-view" class="auth-view">
+      <a class="wordmark" href="#" aria-label="THUNDERDEAL 2.5 home"><span class="brand-emblem" aria-hidden="true"><i data-lucide="zap"></i></span><span class="brand-name"><span>THUNDER</span><strong>DEAL</strong></span><span class="brand-version">2.5</span></a>
+      <section class="auth-panel">
+        <div class="auth-decoration" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="auth-kicker"><span class="signal-dot"></span> YOUR NEXT GAME STARTS HERE</div>
+        <h1 id="auth-title">Create your<br /><span>player account.</span></h1>
+        <p class="auth-subtitle">A personal place for PlayStation and Steam offers.</p>
+        <form id="auth-form" novalidate>
+          <label class="auth-field" id="name-field"><span>YOUR NAME</span><input id="auth-name" name="name" autocomplete="name" placeholder="Player name" required /></label>
+          <label class="auth-field"><span>EMAIL ADDRESS</span><input id="auth-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required /></label>
+          <label class="auth-field"><span>PASSWORD</span><input id="auth-password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" required /></label>
+          <p class="auth-error" id="auth-error" aria-live="polite"></p>
+          <button class="action-button auth-submit" type="submit"><span id="auth-submit-label">Create account</span><i data-lucide="arrow-up-right"></i></button>
+        </form>
+        <p class="auth-switch"><span id="auth-switch-copy">Already have an account?</span> <button id="auth-switch" type="button">Sign in</button></p>
+        <p class="demo-note"><i data-lucide="lock-keyhole"></i> Preview sign-in is stored only in this browser. It is not a secure live account.</p>
+      </section>
+      <div class="auth-footer"><span>GAMES, WITH A PERSONAL TOUCH.</span><span>PAKISTAN · PKR</span></div>
+    </main>
+
+    <div id="store-view" class="store-view" hidden>
+      <header class="topbar">
+        <div class="header-start">
+          <button class="more-button" id="more-open" type="button"><i data-lucide="panel-left-open"></i><span data-i18n="more">More...</span></button>
+          <a class="wordmark compact-wordmark" href="#/hub"><span class="brand-emblem" aria-hidden="true"><i data-lucide="zap"></i></span><span class="brand-name"><span>THUNDER</span><strong>DEAL</strong></span><span class="brand-version">2.5</span></a>
+        </div>
+        <nav class="main-nav" aria-label="Store navigation">
+          <a href="#/hub" data-route="hub" data-i18n="home">Home</a>
+          <a href="#/steam" data-route="steam" data-i18n="steam">Steam games</a>
+          <a href="#/ps5" data-route="ps5" data-i18n="ps5">PS5 games</a>
+        </nav>
+        <div class="header-tools">
+          <label class="search-control"><i data-lucide="search"></i><input id="game-search" type="search" placeholder="Search games" aria-label="Search games" /></label>
+          <button class="signout-button" id="signout" type="button" title="Sign out"><i data-lucide="log-out"></i><span data-i18n="signOut">Sign out</span></button>
+        </div>
+      </header>
+
+      <main id="store-main">
+        <section class="store-page hub-page" data-page="hub">
+          <div class="hub-intro"><span class="eyebrow"><span class="signal-dot"></span> INDEPENDENT GAME SHOP</span><p data-i18n="choose">Choose your platform</p></div>
+          <div class="platform-split">
+            <a class="platform-choice ps5-choice" href="#/ps5" aria-label="Browse PlayStation 5 games">
+              <span class="platform-serial">01 <span>PLATFORM</span></span>
+              <span class="platform-glyph ps-glyph" aria-hidden="true"><span></span><span></span><span></span></span>
+              <span class="platform-name" data-i18n="ps5">PS5 games</span>
+              <span class="platform-caption" data-i18n="consolePicks">Console picks · Prices in PKR</span>
+              <span class="platform-arrow"><i data-lucide="arrow-up-right"></i></span>
+            </a>
+            <div class="split-line" aria-hidden="true"><span></span></div>
+            <a class="platform-choice steam-choice" href="#/steam" aria-label="Browse Steam games">
+              <span class="platform-serial">02 <span>PLATFORM</span></span>
+              <span class="platform-glyph steam-glyph"><i data-lucide="monitor-play"></i></span>
+              <span class="platform-name" data-i18n="steam">Steam games</span>
+              <span class="platform-caption" data-i18n="pcPicks">PC picks · Prices in PKR</span>
+              <span class="platform-arrow"><i data-lucide="arrow-up-right"></i></span>
+            </a>
+          </div>
+          <div class="hub-bottom"><span><i data-lucide="badge-check"></i> <span data-i18n="askFirst">Questions? Contact the seller before purchase.</span></span><span>THUNDERDEAL <b>2.5</b></span></div>
+        </section>
+
+        <section class="store-page catalog-page" data-page="steam" hidden>
+          <div class="catalog-heading steam-heading">
+            <div><span class="eyebrow"><i data-lucide="monitor-play"></i> PC COLLECTION</span><h1 data-i18n="steamTitle">Steam <span>games</span></h1><p data-i18n="steamIntro">Browse the collection. Contact us for availability and purchase details.</p></div>
+            <div class="catalog-total"><b id="steam-total">31</b><span>CURATED<br />TITLES</span></div>
+          </div>
+          <div class="catalog-controls"><span id="steam-result-count">30 titles</span><label><span data-i18n="sort">Sort</span><select id="steam-sort" aria-label="Sort Steam games"><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="title">Title</option></select></label></div>
+          <div class="product-grid" id="steam-products"></div>
+          <aside class="important-note steam-note"><span class="note-icon"><i data-lucide="shield-alert"></i></span><div><h2 data-i18n="important">IMPORTANT INFORMATION</h2><p data-i18n="steamRule">Please use your own Steam account and follow Steam's official sharing features and rules. Read the product information carefully and contact us if you have questions.</p></div></aside>
+          <p class="catalog-contact"><span data-i18n="interested">Please contact us if you are interested:</span> <button class="inline-contact" type="button" data-open-whatsapp>WhatsApp <i data-lucide="arrow-up-right"></i></button></p>
+        </section>
+
+        <section class="store-page catalog-page" data-page="ps5" hidden>
+          <div class="catalog-heading ps5-heading">
+            <div><span class="eyebrow"><i data-lucide="gamepad-2"></i> CONSOLE COLLECTION</span><h1 data-i18n="ps5Title">PlayStation <span>5</span></h1><p data-i18n="ps5Intro">Limited selections, with details confirmed directly by the seller.</p></div>
+            <div class="catalog-total"><b id="ps5-total">03</b><span>AVAILABLE<br />TITLES</span></div>
+          </div>
+          <div class="catalog-controls"><span id="ps5-result-count">03 titles</span><label><span data-i18n="sort">Sort</span><select id="ps5-sort" aria-label="Sort PlayStation games"><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="title">Title</option></select></label></div>
+          <div class="product-grid ps5-grid" id="ps5-products"></div>
+          <aside class="important-note"><span class="note-icon"><i data-lucide="circle-alert"></i></span><div><h2 data-i18n="checkBefore">BEFORE YOU PURCHASE</h2><p data-i18n="ps5Rule">Please confirm the game version, purchase method, compatibility, and any account or console implications with the seller. No setup can be guaranteed to have zero impact.</p></div></aside>
+        </section>
+      </main>
+
+      <footer class="store-footer"><span>THUNDERDEAL 2.5 <b>·</b> INDEPENDENT GAME SHOP</span><span>PKR <b>·</b> PAKISTAN</span></footer>
+    </div>
+
+    <button class="trouble-launch" id="trouble-open" type="button"><i data-lucide="life-buoy"></i><span data-i18n="troubleshooting">Troubleshooting</span></button>
+    <button class="whatsapp-launch" id="whatsapp-open" type="button" aria-label="Open WhatsApp contacts"><img class="whatsapp-mark" src="https://cdn.simpleicons.org/whatsapp/42D27F" alt="" /><span data-i18n="whatsapp">WhatsApp</span></button>
+
+    <dialog class="site-dialog more-dialog" id="more-dialog" aria-labelledby="more-title">
+      <div class="dialog-header"><div><span class="eyebrow">THUNDERDEAL 2.5</span><h2 id="more-title" data-i18n="more">More...</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Close"><i data-lucide="x"></i></button></div>
+      <section class="more-section"><span class="dialog-label" data-i18n="delivery">DELIVERY</span><p data-i18n="deliveryText">We only deliver DVDs in Karachi, Pakistan.</p></section>
+      <section class="more-section"><span class="dialog-label" data-i18n="payment">PAYMENT</span><p data-i18n="paymentText">Payment accepted through Meezan Bank, Bank AL Habib, and Bank Alfalah. Meezan Bank is preferred.</p></section>
+      <section class="settings-section"><span class="dialog-label" data-i18n="settings">SETTINGS</span>
+        <label class="setting-row"><span><i data-lucide="languages"></i><span data-i18n="language">Language</span></span><select id="language-select" aria-label="Language"><option value="en">English</option><option value="ur">اردو</option><option value="zh">中文</option></select></label>
+        <label class="setting-row speed-row"><span><i data-lucide="wind"></i><span data-i18n="bubbleSpeed">Bubble speed</span><output id="speed-value">1.0×</output></span><input id="bubble-speed" type="range" min="0.4" max="2.4" step="0.1" value="1" aria-label="Bubble speed" /></label>
+      </section>
+    </dialog>
+
+    <dialog class="site-dialog contact-dialog" id="whatsapp-dialog" aria-labelledby="whatsapp-title">
+      <div class="dialog-header"><div><span class="eyebrow" data-i18n="directToSeller">DIRECT TO THE SELLER</span><h2 id="whatsapp-title" data-i18n="whatsapp">WhatsApp</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Close"><i data-lucide="x"></i></button></div>
+      <a class="wa-contact" href="https://wa.me/923126674991" target="_blank" rel="noopener noreferrer"><span class="wa-icon"><img class="whatsapp-mark" src="https://cdn.simpleicons.org/whatsapp/42D27F" alt="" /></span><span><b>+92 312 6674991</b><small data-i18n="alwaysAvailable">Available 24/7</small></span><i class="wa-arrow" data-lucide="arrow-up-right"></i></a>
+      <a class="wa-contact" href="https://wa.me/923453152433" target="_blank" rel="noopener noreferrer"><span class="wa-icon"><img class="whatsapp-mark" src="https://cdn.simpleicons.org/whatsapp/42D27F" alt="" /></span><span><b>+92 345 3152433</b><small data-i18n="twelveHours">Available 12 hours a day</small></span><i class="wa-arrow" data-lucide="arrow-up-right"></i></a>
+    </dialog>
+
+    <dialog class="site-dialog trouble-dialog" id="trouble-dialog" aria-labelledby="trouble-title">
+      <div class="dialog-header"><div><span class="eyebrow" data-i18n="supportDesk">SUPPORT DESK</span><h2 id="trouble-title" data-i18n="troubleshooting">Troubleshooting</h2></div><button class="icon-button" type="button" data-close-dialog aria-label="Close"><i data-lucide="x"></i></button></div>
+      <form id="trouble-form">
+        <label class="red-field"><span data-i18n="problem">PROBLEM</span><textarea id="problem-text" rows="5" required placeholder="Describe the issue..."></textarea></label>
+        <label class="red-field email-field"><span data-i18n="emailBox">EMAIL BOX</span><input id="trouble-email" type="email" required placeholder="you@example.com" /></label>
+        <p class="dialog-hint" id="trouble-hint" data-i18n="emailNote">Submitting opens your email app with the message addressed to our support email.</p>
+        <button class="action-button" type="submit"><span data-i18n="submitProblem">Submit problem</span><i data-lucide="send"></i></button>
+      </form>
+    </dialog>
+
+    <dialog class="site-dialog product-dialog" id="product-dialog" aria-labelledby="product-title">
+      <button class="icon-button product-close" type="button" data-close-dialog aria-label="Close"><i data-lucide="x"></i></button>
+      <div class="product-detail" id="product-detail"></div>
+    </dialog>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
